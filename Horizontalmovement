@@ -1,0 +1,62 @@
+public class HorizontalMovement : MonoBehaviour
+{
+    bool collideWithMe;
+    float positionX;
+    float positionY;
+    float positionZ;
+    float resetX;
+    float resetY;
+    float resetZ;
+    float enemySpeedOne;
+    
+      // Start is called before the first frame update
+    void Start()
+    {
+        collideWithMe = false;
+        positionX = 2f;
+        positionY = 0;
+        positionZ = 0;
+
+        resetX = 0;
+        resetY = 0;
+        resetZ = 0;
+
+        enemySpeedOne = 5f;
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if(collideWithMe == false){
+            transform.position += new Vector3(positionX* Time.deltaTime * enemySpeedOne, positionY, positionZ);
+        }
+        if(collideWithMe == true){
+
+            transform.position += new Vector3(-positionX * Time.deltaTime * enemySpeedOne, positionY, positionZ);
+
+        }
+
+        }
+    
+
+     void OnCollisionEnter(Collision other) 
+     {
+        
+        if(other.gameObject.tag == "WallEast" && collideWithMe == false)
+        {
+                collideWithMe = true;
+              transform.position += new Vector3(resetX, resetY, resetZ);  
+
+        }
+              if(other.gameObject.tag == "WallWest" && collideWithMe == true)
+        {
+                collideWithMe = false;
+              transform.position += new Vector3(resetX, resetY, resetZ);  
+
+        }
+
+        }
+
+}
+  
