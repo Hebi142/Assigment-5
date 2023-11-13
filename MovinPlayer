@@ -1,0 +1,38 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class MovinPlayer : MonoBehaviour
+{
+    float movementSpeed;
+    float horiMovement;
+    float vertMovement;
+    float jumpHeight = 5f;
+    Rigidbody playerRB;
+
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        playerRB = GetComponent<Rigidbody>();
+        movementSpeed = 7f;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        {
+            if (Input.GetButtonDown("Jump"))
+            {
+
+                playerRB.AddForce(Vector3.up * jumpHeight, ForceMode.Impulse);
+            }
+         
+            horiMovement = Input.GetAxis("Horizontal");
+            vertMovement = Input.GetAxis("Vertical");
+
+            transform.Translate(horiMovement * Time.deltaTime * movementSpeed, 0, 0);
+            transform.Translate(0, 0, vertMovement * Time.deltaTime * movementSpeed);
+        }
+    }
+}
